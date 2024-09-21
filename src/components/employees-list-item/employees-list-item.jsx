@@ -2,8 +2,13 @@ import './employess-list-item.css';
 
 const EmployeesListItem = ({name, surname, salary, increase}) => {
 
+    let classNameIncrease = "list-group-item d-flex justify-content-between";
+    if(increase) {
+        classNameIncrease += ' increase'
+    }
+
     return (
-         <li className={increase ? "list-group-item d-flex justify-content-between increase" : "list-group-item d-flex justify-content-between"}>
+         <li className={classNameIncrease}>
             <span className="list-group-item-label">{name} {surname}</span>
             <input type="text" className="list-group-item-input" defaultValue={`${salary} руб`}/>
             <div className='d-flex justify-content-center align-items-center'>

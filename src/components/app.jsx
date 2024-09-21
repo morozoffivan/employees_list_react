@@ -9,7 +9,7 @@ const App = () => {
 
     const data = [
         {name:'Wi', surname : 'Smith', salary : 1000, increase: false},
-        {name:'Alex', surname : 'Smith', salary : 1200, increase: true},
+        {name:'Alex', surname : 'Smith', salary : 1200, increase: false},
         {name:'John', surname : 'Smith', salary : 800, increase: true},
     ]
 
