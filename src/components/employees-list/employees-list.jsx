@@ -6,7 +6,7 @@ return (
         <ul className='app-list list-group'>
             {data.map(item => {
                 return(
-                    <EmployeesListItem name={item.name} surname={item.surname} salary={item.salary} />
+                    <EmployeesListItem {...item}/>
                     )
                 })}
         </ul>
