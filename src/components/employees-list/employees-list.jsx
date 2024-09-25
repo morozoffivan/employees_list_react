@@ -6,7 +6,10 @@ return (
         <ul className='app-list list-group'>
             {data.map((item, index) => {
                 return(
-                    <EmployeesListItem key = {index} {...item}/>
+                    <EmployeesListItem 
+                    key = {index} 
+                    {...item}
+                    onDelete = {() => console.log('Del')}/>
                     )
                 })}
         </ul>
