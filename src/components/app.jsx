@@ -30,6 +30,7 @@ class App extends Component {
     }
 
     addItem = (name, salary) => {
+    
         const newItem = {
             name,
             salary,
@@ -38,6 +39,11 @@ class App extends Component {
             id: this.maxId++,
         }
         this.setState(({data}) => {
+            if(newItem.name.length < 3 || newItem.salary.length < 3) {
+                return {
+                    data: data,
+                }
+            }
             const newArr = [...data, newItem];
             return {
                 data: newArr,
