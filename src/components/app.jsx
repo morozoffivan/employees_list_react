@@ -12,11 +12,12 @@ class App extends Component {
         // переносим данные в стейт чтобы можно было ими манипулировать 
         this.state = {
             data: [
-                {name:'Wi Smith', salary : 1000, rise: false, increase: false, id: 1, },
+                {name:'Wi Smith', salary : 1000, rise: true, increase: false, id: 1, },
                 {name:'Alex Smith', salary : 1200, rise: false, increase: false, id: 2, },
                 {name:'John Smith', salary : 800, rise: false,  increase: false, id: 3, },
             ],
             term: '',
+            filter: 'all',
         }
         // создаем мах ид для дальнейшего добавления
         this.maxId = 4;
@@ -84,19 +85,32 @@ class App extends Component {
         return items.filter(item => {
             return item.name.indexOf(term) > -1; // такой метод возвращает -1 если нет совпадений, если совпадения есть возвращает индекс элемента в массиве.
         })
-
-        
     }
 
     onUpdateSearch = (term) => {
         this.setState({term}) // т.к term: term => можно записать коротко {term}
     }
 
+    filterPost = (items, filter) => {
+        if(filter === 'rise' ) {
+            return items.filter(item => item.rise)
+        } else if (filter === 'bigSalary') {
+            return items.filter(item => item.salary > 100000);
+        } else {
+            return items;
+        }
+    }
+
+    onFilterSelect = (filter) => {
+        this.setState({filter});
+    }
+
     render() {
-        const {data, term} = this.state;
+        const {data, term, filter} = this.state;
+        
         const countOfEmployees = this.state.data.length;
         const countOfIncreased = this.state.data.filter(item => item.increase).length;
-        const visibleData = this.searchEmp(data, term); // вместо отображения data, мы отображаем data через метод фильтрации, так как если строка пуска возвращается все тот же массив данных
+        const visibleData = this.filterPost(this.searchEmp(data, term), filter); // вместо отображения data, мы отображаем data через метод фильтрации, так как если строка пуска возвращается все тот же массив данных
         return (
             
             <div className="app">
@@ -107,7 +121,7 @@ class App extends Component {
                 <div className='search-panel'>
                     <SearchPanel
                     onUpdateSearch ={this.onUpdateSearch}/>
-                    <AppFilter/>
+                    <AppFilter filter ={filter} onFilterSelect={this.onFilterSelect}/>
                 </div>
     
                 <EmployeesList 
